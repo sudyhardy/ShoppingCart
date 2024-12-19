@@ -1,0 +1,23 @@
+﻿@model SmallCartViewModel
+
+@if (Model != null)
+{
+    <p>Items in cart: <span class="badge badge-primary">@Model.NumberOfItems</span></p>
+    <p>Total: <b>@Model.TotalAmount.ToString("C2")</b></p>
+    <a class="btn btn-primary" asp-controller="Cart" asp-action="Index">View Cart</a>
+    <!-- Custom Clear Cart Button with Confirmation -->
+    <a href="#" class="btn btn-danger" onclick="confirmClearCart()">Clear Cart</a>
+}
+else
+{
+    <p class="lead m-0">Your cart is empty</p>
+}
+
+<!-- JavaScript to show confirmation dialog for clearing cart -->
+<script>
+    function confirmClearCart() {
+        if (confirm("Are you sure you want to clear the cart?")) {
+            window.location.href = '@Url.Action("Clear", "Cart")'; // Redirect to Clear action in Cart controller
+        }
+    }
+</script>
